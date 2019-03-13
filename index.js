@@ -3,7 +3,9 @@
  * @arg {string} content The content to be processed.
  * @arg {int} maxlen The target length of the fragments.
  */
-module.exports = function (content = '', maxlen = 200) {
+module.exports = function (content, maxlen) {
+    content = (typeof content !== 'undefined') ? content : '';
+    maxlen = (typeof maxlen !== 'undefined') ? maxlen : 200;
     let strings = [];
     content = content.replace(/(\n|\s{2,})/g, ' ');
     while (content.length) {
