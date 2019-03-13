@@ -28,5 +28,8 @@ const article = `
     diam massa, eu aliquet lacus dapibus ut. Etiam elementum massa id augue consequat maximus. Nunc fringilla nunc at 
     venenatis iaculis. Nullam sagittis vitae nisi at tempus. Ut mattis urna at tortor.
 `;
-const strings = splitSentences(article, 199);
-console.log(strings);
+console.log('Splitting at default length\n' + '-'.repeat(40));
+console.log(splitSentences(article));
+const maxlen = 100;
+console.log('\n\nSplitting at length of ' + maxlen + '\n' + '-'.repeat(40));
+console.log(splitSentences(article, maxlen));
