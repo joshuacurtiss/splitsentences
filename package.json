@@ -3,7 +3,6 @@
     "description": "Function that tries to split sentences by max size, first by sentence, then by other punctuation.",
     "author": "Josh Curtiss <josh@curtiss.me>",
     "version": "0.1.0",
-    "private": true,
     "scripts": {
         "test": "node test"
     },
