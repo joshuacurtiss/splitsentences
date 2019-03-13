@@ -1,3 +1,4 @@
+const splitStrings = require('./index');
 const article = `
     The Industrial Revolution had several roots, one of which was a commercial revolution that, beginning as far back as the sixteenth century, accompanied Europe’s expansion overseas.
     Both exports and imports showed spectacular growth, particularly in England and France.
@@ -29,39 +30,5 @@ const article = `
     Non-landholding peasants and cottage workers, who worked for wages and grazed cows or pigs on the village common, were also hurt when the common was no longer available.
     It was such people who began to flock to the cities seeking employment and who found work in the factories that would transform the nation and, the world.
 `;
-const MAXLEN = 199;
-let strings = [];
-let content=article.replace(/(\n|\s{2,})/g, ' ');
-while (content.length) {
-    let fragment;
-    if (content.length > MAXLEN) {
-        let bestIndex = 0;
-        let match;
-        if (!bestIndex) {
-            const sentenceRegex = /[;.?!]/g;
-            while (match = sentenceRegex.exec(content)) { // eslint-disable-line no-cond-assign
-                if (match.index < MAXLEN) bestIndex = match.index;
-            }
-        }
-        if (!bestIndex) {
-            const commaRegex = /,/g;
-            while (match = commaRegex.exec(content)) { // eslint-disable-line no-cond-assign
-                if (match.index < MAXLEN) bestIndex = match.index;
-            }
-        }
-        if (!bestIndex) {
-            const spaceRegex = /\s+/g;
-            while (match = spaceRegex.exec(content)) { // eslint-disable-line no-cond-assign
-                if (match.index < MAXLEN) bestIndex = match.index;
-            }
-        }
-        if (!bestIndex) fragment = content;
-        else fragment = content.substr(0, bestIndex + 1);
-    } else {
-        fragment = content;
-    }
-    // if (debugging) console.log('"' + fragment + '"');
-    strings.push(fragment.trim());
-    content = content.substr(fragment.length).trim();
-}
+const strings = splitStrings(article, 199);
 console.log(strings);
