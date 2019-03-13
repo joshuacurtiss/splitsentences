@@ -5,7 +5,7 @@ const article = `
     Imports included a variety of new beverages, spices, and ship’s goods around the world and brought money flowing back.
     Europe’s economic institutions, particularly those in England, were strong, had wealth available for new investment, and seemed almost to be waiting for some technological breakthrough that would expand their profit-making potential even more.
     The breakthrough came in Great Britain, where several economic advantages created a climate especially favorable to the encouragement of new technology.
-    One was its geographic location at the crossroads of international trade.
+    One was its geographic location at the crossroads of international trade. Isn't that great? 
     Internally, Britain was endowed with easily navigable natural waterway, which helped its trade and communication with the world.
     Beginning in the 1770’s, it enjoyed a boom in canal building, which helped make its domestic market more accessible.
     Because water transportation was the cheapest means of carrying goods to market, canals reduced prices and thus increased consumer demand.
@@ -31,34 +31,37 @@ const article = `
 `;
 const MAXLEN = 199;
 let strings = [];
-article
-    .replace(/(\n|\s{2,})/g, ' ')
-    .split(/[;.?!]/)
-    .map(sentence => sentence.trim())
-    .forEach(sentence => {
-        while (sentence.length) {
-            let fragment;
-            if (sentence.length > MAXLEN) {
-                const commaRegex = /[,;]/g;
-                let bestIndex = 0;
-                let match;
-                while (match = commaRegex.exec(sentence)) { // eslint-disable-line no-cond-assign
-                    if (match.index < MAXLEN) bestIndex = match.index;
-                }
-                if (!bestIndex) {
-                    const spaceRegex = /\s+/g;
-                    while (match = spaceRegex.exec(sentence)) { // eslint-disable-line no-cond-assign
-                        if (match.index < MAXLEN) bestIndex = match.index;
-                    }
-                }
-                if (!bestIndex) fragment = sentence;
-                else fragment = sentence.substr(0, bestIndex + 1);
-            } else {
-                fragment = sentence;
+let content=article.replace(/(\n|\s{2,})/g, ' ');
+while (content.length) {
+    let fragment;
+    if (content.length > MAXLEN) {
+        let bestIndex = 0;
+        let match;
+        if (!bestIndex) {
+            const sentenceRegex = /[;.?!]/g;
+            while (match = sentenceRegex.exec(content)) { // eslint-disable-line no-cond-assign
+                if (match.index < MAXLEN) bestIndex = match.index;
             }
-            // if (debugging) console.log('"' + fragment + '"');
-            strings.push(fragment.trim());
-            sentence = sentence.substr(fragment.length).trim();
         }
-    });
+        if (!bestIndex) {
+            const commaRegex = /,/g;
+            while (match = commaRegex.exec(content)) { // eslint-disable-line no-cond-assign
+                if (match.index < MAXLEN) bestIndex = match.index;
+            }
+        }
+        if (!bestIndex) {
+            const spaceRegex = /\s+/g;
+            while (match = spaceRegex.exec(content)) { // eslint-disable-line no-cond-assign
+                if (match.index < MAXLEN) bestIndex = match.index;
+            }
+        }
+        if (!bestIndex) fragment = content;
+        else fragment = content.substr(0, bestIndex + 1);
+    } else {
+        fragment = content;
+    }
+    // if (debugging) console.log('"' + fragment + '"');
+    strings.push(fragment.trim());
+    content = content.substr(fragment.length).trim();
+}
 console.log(strings);
