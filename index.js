@@ -4,36 +4,39 @@
  * @arg {int} maxlen The target length of the fragments.
  */
 module.exports = function (content, maxlen) {
+    // Arg sanitization
     content = (typeof content !== 'undefined') ? content : '';
     maxlen = (typeof maxlen !== 'undefined') ? maxlen : 200;
-    let strings = [];
-    content = content.replace(/(\n|\s{2,})/g, ' ');
+    // Declarations
+    var strings = [];
+    var fragment, bestIndex, match, idx;
+    var sentenceRegex = /[;.?!]['"]*/g;
+    var commaRegex = /,['"]*/g;
+    var spaceRegex = /\s+/g;
+    // First, clean up tabs, newlines and multiple spaces
+    content = content.replace(/([\n\t]|\s{2,})/g, ' ');
+    // Whittle away at the content until all the fragments account for it
     while (content.length) {
-        let fragment;
         if (content.length > maxlen) {
-            let bestIndex = 0;
-            let match;
-            // Check for sentences (delimited by ;.?!)
+            bestIndex = 0;
+            // Check for sentences
             if (!bestIndex) {
-                const sentenceRegex = /[;.?!]['"]*/g;
                 while (match = sentenceRegex.exec(content)) {
-                    const idx = match.index + match[0].length - 1;
+                    idx = match.index + match[0].length - 1;
                     if (idx < maxlen) bestIndex = idx;
                 }
             }
-            // Check for sentence fragments (delimited by commas)
+            // Check for sentence fragments
             if (!bestIndex) {
-                const commaRegex = /,['"]*/g;
                 while (match = commaRegex.exec(content)) {
-                    const idx = match.index + match[0].length - 1;
+                    idx = match.index + match[0].length - 1;
                     if (idx < maxlen) bestIndex = idx;
                 }
             }
             // Check for words delimited by spaces
             if (!bestIndex) {
-                const spaceRegex = /\s+/g;
                 while (match = spaceRegex.exec(content)) {
-                    const idx = match.index + match[0].length - 1;
+                    idx = match.index + match[0].length - 1;
                     if (idx < maxlen) bestIndex = idx;
                 }
             }
