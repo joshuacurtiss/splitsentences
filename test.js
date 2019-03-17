@@ -23,9 +23,9 @@ const article = `
     vitae pretium ligula eleifend.
     
     Ut egestas mollis diam, ut bibendum sem blandit quis. Curabitur lobortis, dui ut mollis hendrerit, risus arcu 
-    luctus lectus, in suscipit justo dui luctus magna. Suspendisse ut sem consectetur ipsum dignissim commodo eget in 
-    neque. Vivamus eget vulputate velit. Quisque at velit non risus consequat rhoncus at sed tortor. Aenean efficitur 
-    diam massa, eu aliquet lacus dapibus ut. Etiam elementum massa id augue consequat maximus. Nunc fringilla nunc at 
+    'luctus lectus,' in suscipit justo dui luctus magna. Suspendisse ut sem consectetur ipsum dignissim commodo eget 'in 
+    neque'. Vivamus eget vulputate velit. Quisque at velit non risus consequat rhoncus at sed tortor. Aenean efficitur 
+    diam massa, "eu aliquet lacus dapibus ut." Etiam elementum massa id augue consequat maximus. Nunc fringilla nunc at 
     venenatis iaculis. Nullam sagittis vitae nisi at tempus. Ut mattis urna at tortor.
 `;
 console.log('Splitting at default length\n' + '-'.repeat(40));
