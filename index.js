@@ -9,7 +9,7 @@ module.exports = function (content, maxlen) {
     maxlen = (typeof maxlen !== 'undefined') ? maxlen : 200;
     // Declarations
     var strings = [];
-    var fragment, bestIndex, match, idx, regex;
+    var bestIndex, fragment, idx, match, regex;
     var regexes = [
         // Sentences (plus semicolon)
         /[;.?!]['"]*/g,
