@@ -15,23 +15,26 @@ module.exports = function (content, maxlen) {
             let match;
             // Check for sentences (delimited by ;.?!)
             if (!bestIndex) {
-                const sentenceRegex = /[;.?!]/g;
+                const sentenceRegex = /[;.?!]['"]*/g;
                 while (match = sentenceRegex.exec(content)) {
-                    if (match.index < maxlen) bestIndex = match.index;
+                    const idx = match.index + match[0].length - 1;
+                    if (idx < maxlen) bestIndex = idx;
                 }
             }
             // Check for sentence fragments (delimited by commas)
             if (!bestIndex) {
-                const commaRegex = /,/g;
+                const commaRegex = /,['"]*/g;
                 while (match = commaRegex.exec(content)) {
-                    if (match.index < maxlen) bestIndex = match.index;
+                    const idx = match.index + match[0].length - 1;
+                    if (idx < maxlen) bestIndex = idx;
                 }
             }
             // Check for words delimited by spaces
             if (!bestIndex) {
                 const spaceRegex = /\s+/g;
                 while (match = spaceRegex.exec(content)) {
-                    if (match.index < maxlen) bestIndex = match.index;
+                    const idx = match.index + match[0].length - 1;
+                    if (idx < maxlen) bestIndex = idx;
                 }
             }
             // Define the fragment we found
