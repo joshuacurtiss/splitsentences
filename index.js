@@ -12,9 +12,9 @@ module.exports = function (content, maxlen) {
     var bestIndex, fragment, idx, match, regex;
     var regexes = [
         // Sentences (plus semicolon)
-        /[;.?!]['"]*/g,
+        /[;.?!]['"\u2019\u201D]*/g,
         // Sentence fragments with commas
-        /,['"]*/g,
+        /,['"\u2019\u201D]*/g,
         // Words (spaces)
         /\s+/g
     ];
