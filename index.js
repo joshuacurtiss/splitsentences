@@ -24,16 +24,16 @@ module.exports = function (content, maxlen) {
     while (content.length) {
         if (content.length > maxlen) {
             bestIndex = 0;
-            // Loop thru the different regex types we have, to find sentences, then fragments, then words
-            for (var i = 0; i < regexes.length; i++) {
+            // Loop thru the different regex types we have, to find sentences, then fragments, then words, until we find a decent index.
+            for (var i = 0; i < regexes.length && bestIndex === 0; i++) {
                 regex = regexes[i];
-                // If a satisfactory index for splitting the string isn't found yet, try this...
-                if (!bestIndex) {
-                    // Find the next string snippet. If it's under the max, save it. We'll loop thru all but only keep the best under the max.
-                    while (match = regex.exec(content)) {
-                        idx = match.index + match[0].length - 1;
-                        if (idx < maxlen) bestIndex = idx;
-                    }
+                regex.lastIndex = 0;
+                // Find the next string snippet. If it's under the max, save it. We'll loop thru all but only keep the best under the max.
+                while (match = regex.exec(content)) {
+                    // If a multi-char match was found, set index to the end of the match.
+                    idx = match.index + match[0].length - 1;
+                    if (idx < maxlen) bestIndex = idx;
+                    else break;
                 }
             }
             // Define the snippet we found. If we didn't find anything, well, just give the whole string. We don't know how to handle it.
