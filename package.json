@@ -2,7 +2,7 @@
     "name": "splitsentences",
     "description": "Function that tries to split sentences by max size, first by sentence, then by other punctuation.",
     "author": "Josh Curtiss <josh@curtiss.me>",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": "MIT",
     "main": "index.js",
     "scripts": {
