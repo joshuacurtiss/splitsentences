@@ -27,7 +27,7 @@ var article =
     '\'luctus lectus,\' in suscipit justo dui luctus magna. Suspendisse ut sem consectetur ipsum dignissim commodo eget \'in ' +
     'neque\'. Vivamus eget vulputate velit. Quisque at velit non risus consequat rhoncus at sed tortor. Aenean efficitur ' +
     'diam massa, "eu aliquet lacus dapibus ut." Etiam elementum massa id augue consequat maximus. Nunc fringilla nunc at ' +
-    'venenatis iaculis. Nullam sagittis vitae nisi at tempus. Ut mattis urna at tortor.';
+    'venenatis iaculis 3.141592654. Nullam sagittis vitae nisi at tempus. Ut mattis urna at tortor.';
 console.log('Splitting at default length\n' + '----------------------------------------');
 console.log(splitSentences(article));
 console.log('\n\nSplitting at length of ' + maxlen + '\n' + '----------------------------------------');
